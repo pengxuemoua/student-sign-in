@@ -4,7 +4,7 @@
   <new-student-form v-on:student-added="newStudentsAdded"></new-student-form>
   <student-table v-bind:students="students" 
   v-on:student-arrived-or-left="studentArrivedOrLeft" 
-  v-on:delete-student="deleteStudent"></student-table>
+  v-on:delete-student="studentDeleted"></student-table>
   
   <student-message v-bind:student="mostRecentStudent"></student-message>
 
@@ -52,13 +52,17 @@ export default {
         this.mostRecentStudent = updateStudent
       }
     },
-    deleteStudent(student) {
+    studentDeleted(student) {
       // filter returns a new array of all students for whom the function returns true
       this.students = this.students.filter( function(s) {
         if (s != student) {
           return true
         }
       })
+
+      //clear welcome/goodbye
+      this.mostRecentStudent = {}
+
     }
 
   }

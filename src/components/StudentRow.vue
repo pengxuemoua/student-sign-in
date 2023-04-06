@@ -19,7 +19,9 @@ export default {
             this.$emit('student-arrived-or-left', student, present)
         },
         deleteStudent() {
-            this.$emit('delete-student', this.student)
+            if (confirm(`Delete ${this.student.name}?`)) {
+                this.$emit('delete-student', this.student)
+            }
         }
     }
 }
@@ -36,6 +38,10 @@ export default {
 .absent {
     color: black;
     font-weight: bold;
+}
+
+img {
+    height: 25px;
 }
 
 </style>
